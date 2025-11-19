@@ -1,11 +1,12 @@
 import { defineConfig } from 'vite'
+import tailwindcss from '@tailwindcss/vite'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 export default defineConfig({
-  plugins: [],
+  plugins: [tailwindcss()],
   // Disable Vite's publicDir feature because we build directly into the package `public/` folder.
   // When `outDir` and `publicDir` point to the same folder Vite warns that the feature
   // may not work correctly. We don't need the automatic public dir copy here.
