@@ -14,20 +14,22 @@ export default defineConfig({
   build: {
     outDir: path.resolve(__dirname, 'public'),
     emptyOutDir: false,
-    rollupOptions: {
-      input: {
-        app: path.resolve(__dirname, 'resources/js/app.js'),
-        style: path.resolve(__dirname, 'resources/css/app.tailwind.css')
-      },
-      output: {
-        entryFileNames: 'js/[name]-[hash].js',
-        chunkFileNames: 'js/[name]-[hash].js',
-        assetFileNames: (chunkInfo) => {
-          if (chunkInfo.name && chunkInfo.name.endsWith('.css')) return 'css/[name]-[hash][extname]'
-          return 'assets/[name]-[hash][extname]'
+      rollupOptions: {
+        input: {
+          app: path.resolve(__dirname, 'resources/js/app.js')
+        },
+        output: {
+          entryFileNames: 'js/[name].js',
+          chunkFileNames: 'js/[name].js',
+          assetFileNames: (assetInfo) => {
+            // CSS files imported from JS - output as app.css directly
+            if (assetInfo.name && assetInfo.name.endsWith('.css')) {
+              return 'css/app[extname]'
+            }
+            return 'assets/[name][extname]'
+          }
         }
-      }
-    },
+      },
     target: 'es2018'
   }
 })

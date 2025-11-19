@@ -5,14 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Management Login</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+        {{-- Load compiled/published assets if available (published to public/vendor/management-panel) --}}
+        @if (file_exists(public_path('vendor/management-panel/css/app.css')))
+        <link rel="stylesheet" href="{{ asset('vendor/management-panel/css/app.css') }}">
+    @else
+        {{-- Fallback to Vite during package development --}}
+        @vite(['resources/css/app.css'])
+    @endif
 </head>
-<body class="bg-linear-to-br from-gray-900 via-gray-800 to-gray-900 min-h-screen flex items-center justify-center">
+<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 min-h-screen flex items-center justify-center">
     <div class="w-full max-w-md">
         <!-- Login Card -->
         <div class="bg-gray-800 shadow-2xl rounded-lg overflow-hidden">
             <!-- Header -->
-            <div class="bg-linear-to-r from-red-600 to-red-700 px-8 py-6">
+            <div class="bg-gradient-to-r from-red-600 to-red-700 px-8 py-6">
                 <div class="flex items-center justify-center space-x-3">
                     <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -96,7 +102,7 @@
                     <!-- Submit Button -->
                     <button
                         type="submit"
-                        class="w-full bg-linear-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-800"
+                        class="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-800"
                     >
                         <div class="flex items-center justify-center space-x-2">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

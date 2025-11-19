@@ -45,6 +45,7 @@ class ManagementPanelServiceProvider extends ServiceProvider
             $this->commands([
                 Console\InstallCommand::class,
                 Console\CleanSessionsCommand::class,
+                Console\PublishAssetsCommand::class,
             ]);
         }
         

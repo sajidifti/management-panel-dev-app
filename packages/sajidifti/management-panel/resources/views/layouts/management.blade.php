@@ -125,33 +125,53 @@
     <script>
         // Dark Mode Toggle Functionality
         (function() {
+            console.log('[Theme] Initializing theme toggle...');
             const themes = ['light', 'dark', 'system'];
-            let currentThemeIndex = 0;
             
             // Get theme from localStorage or default to system
             function getStoredTheme() {
-                return localStorage.getItem('theme') || 'system';
+                const theme = localStorage.getItem('theme') || 'system';
+                console.log('[Theme] getStoredTheme() ->', theme);
+                return theme;
             }
             
             // Set theme in localStorage
             function setStoredTheme(theme) {
+                console.log('[Theme] setStoredTheme() ->', theme);
                 localStorage.setItem('theme', theme);
+                console.log('[Theme] localStorage.setItem("theme", "' + theme + '")');
             }
             
             // Get system preference
             function getSystemTheme() {
-                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const systemTheme = isDark ? 'dark' : 'light';
+                console.log('[Theme] getSystemTheme() ->', systemTheme, '(prefers-color-scheme: dark =', isDark + ')');
+                return systemTheme;
             }
             
             // Apply theme to document
             function applyTheme(theme) {
+                console.log('[Theme] applyTheme() called with theme:', theme);
                 const effectiveTheme = theme === 'system' ? getSystemTheme() : theme;
+                console.log('[Theme] effectiveTheme:', effectiveTheme);
+                
+                const htmlElement = document.documentElement;
+                const hasDarkClass = htmlElement.classList.contains('dark');
+                console.log('[Theme] html element classes before:', htmlElement.className);
+                console.log('[Theme] hasDarkClass before:', hasDarkClass);
                 
                 if (effectiveTheme === 'dark') {
-                    document.documentElement.classList.add('dark');
+                    htmlElement.classList.add('dark');
+                    console.log('[Theme] Added "dark" class to html element');
                 } else {
-                    document.documentElement.classList.remove('dark');
+                    htmlElement.classList.remove('dark');
+                    console.log('[Theme] Removed "dark" class from html element');
                 }
+                
+                const hasDarkClassAfter = htmlElement.classList.contains('dark');
+                console.log('[Theme] html element classes after:', htmlElement.className);
+                console.log('[Theme] hasDarkClass after:', hasDarkClassAfter);
                 
                 // Update icon visibility
                 updateThemeIcon(theme);
@@ -159,9 +179,16 @@
             
             // Update the theme icon based on current theme
             function updateThemeIcon(theme) {
+                console.log('[Theme] updateThemeIcon() called with theme:', theme);
                 const lightIcon = document.getElementById('theme-icon-light');
                 const darkIcon = document.getElementById('theme-icon-dark');
                 const systemIcon = document.getElementById('theme-icon-system');
+                
+                console.log('[Theme] Icons found:', {
+                    lightIcon: !!lightIcon,
+                    darkIcon: !!darkIcon,
+                    systemIcon: !!systemIcon
+                });
                 
                 if (lightIcon && darkIcon && systemIcon) {
                     lightIcon.classList.add('hidden');
@@ -170,53 +197,105 @@
                     
                     if (theme === 'light') {
                         lightIcon.classList.remove('hidden');
+                        console.log('[Theme] Showing light icon');
                     } else if (theme === 'dark') {
                         darkIcon.classList.remove('hidden');
+                        console.log('[Theme] Showing dark icon');
                     } else {
                         systemIcon.classList.remove('hidden');
+                        console.log('[Theme] Showing system icon');
                     }
+                } else {
+                    console.warn('[Theme] Icons not found!', { lightIcon, darkIcon, systemIcon });
                 }
             }
             
             // Cycle through themes
             function cycleTheme() {
-                currentThemeIndex = (currentThemeIndex + 1) % themes.length;
-                const newTheme = themes[currentThemeIndex];
+                console.log('[Theme] ===== cycleTheme() called =====');
+                const currentTheme = getStoredTheme();
+                console.log('[Theme] Current theme:', currentTheme);
+                const currentIndex = themes.indexOf(currentTheme);
+                console.log('[Theme] Current index:', currentIndex);
+                const nextIndex = (currentIndex + 1) % themes.length;
+                console.log('[Theme] Next index:', nextIndex);
+                const newTheme = themes[nextIndex];
+                console.log('[Theme] New theme:', newTheme);
+                
                 setStoredTheme(newTheme);
                 applyTheme(newTheme);
+                console.log('[Theme] ===== cycleTheme() completed =====');
             }
             
             // Initialize theme on page load
-            const storedTheme = getStoredTheme();
-            currentThemeIndex = themes.indexOf(storedTheme);
-            applyTheme(storedTheme);
+            console.log('[Theme] Initializing theme on page load...');
+            const initialTheme = getStoredTheme();
+            console.log('[Theme] Initial theme:', initialTheme);
+            applyTheme(initialTheme);
             
             // Set up theme toggle button - wait for DOM
+            function initToggle() {
+                console.log('[Theme] initToggle() called');
+                const themeToggle = document.getElementById('theme-toggle');
+                console.log('[Theme] theme-toggle element found:', !!themeToggle);
+                
+                if (themeToggle) {
+                    console.log('[Theme] Cloning toggle button to remove existing listeners...');
+                    // Remove any existing listeners by cloning
+                    const newToggle = themeToggle.cloneNode(true);
+                    themeToggle.parentNode.replaceChild(newToggle, themeToggle);
+                    console.log('[Theme] Toggle button cloned and replaced');
+                    
+                    // Add click listener
+                    newToggle.addEventListener('click', function(e) {
+                        console.log('[Theme] ===== TOGGLE BUTTON CLICKED =====');
+                        console.log('[Theme] Event:', e);
+                        console.log('[Theme] Event target:', e.target);
+                        console.log('[Theme] Event currentTarget:', e.currentTarget);
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('[Theme] Calling cycleTheme()...');
+                        cycleTheme();
+                        console.log('[Theme] cycleTheme() returned');
+                    });
+                    console.log('[Theme] Click listener attached to toggle button');
+                    
+                    // Initial icon update
+                    const storedTheme = getStoredTheme();
+                    console.log('[Theme] Updating icon for stored theme:', storedTheme);
+                    updateThemeIcon(storedTheme);
+                } else {
+                    console.error('[Theme] theme-toggle element NOT FOUND!');
+                }
+            }
+            
+            // Initialize when DOM is ready
+            console.log('[Theme] Document readyState:', document.readyState);
             if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', initToggle);
+                console.log('[Theme] Waiting for DOMContentLoaded...');
+                document.addEventListener('DOMContentLoaded', function() {
+                    console.log('[Theme] DOMContentLoaded fired');
+                    initToggle();
+                });
             } else {
+                console.log('[Theme] DOM already ready, calling initToggle() immediately');
                 initToggle();
             }
             
-            function initToggle() {
-                const themeToggle = document.getElementById('theme-toggle');
-                if (themeToggle) {
-                    themeToggle.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        cycleTheme();
-                    });
-                    // Initial icon update
-                    updateThemeIcon(storedTheme);
-                }
-            }
-            
             // Listen for system theme changes
-            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function() {
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+                console.log('[Theme] System theme changed:', e.matches ? 'dark' : 'light');
                 const currentTheme = getStoredTheme();
+                console.log('[Theme] Current stored theme:', currentTheme);
                 if (currentTheme === 'system') {
+                    console.log('[Theme] Applying system theme...');
                     applyTheme('system');
+                } else {
+                    console.log('[Theme] Ignoring system theme change (not in system mode)');
                 }
             });
+            
+            console.log('[Theme] Theme toggle initialization complete');
         })();
     </script>
     
