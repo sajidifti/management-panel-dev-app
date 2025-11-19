@@ -5,7 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'System Management')</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    {{-- Load compiled/published assets if available (published to public/vendor/management-panel) --}}
+    @if (file_exists(public_path('vendor/management-panel/css/app.css')))
+        <link rel="stylesheet" href="{{ asset('vendor/management-panel/css/app.css') }}">
+    @else
+        {{-- Fallback to Vite during package development --}}
+        @vite(['resources/css/app.css'])
+    @endif
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script>
         // Dark Mode Implementation - Run immediately before page loads
@@ -214,6 +220,13 @@
         })();
     </script>
     
+    {{-- Load compiled/published JS if available, otherwise fallback to Vite dev build --}}
+    @if (file_exists(public_path('vendor/management-panel/js/app.js')))
+        <script src="{{ asset('vendor/management-panel/js/app.js') }}" defer></script>
+    @else
+        @vite(['resources/js/app.js'])
+    @endif
+
     @stack('scripts')
 </body>
 </html>

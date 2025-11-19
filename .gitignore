@@ -22,3 +22,14 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Ignore node_modules and build caches in nested packages
+**/node_modules/
+**/.vite/
+**/.cache/
+**/dist/
+
+# Ignore local build/debug artifacts
+packages/**/build_debug*.txt
+packages/**/build_postcss*.txt
+packages/**/build_stable*.txt

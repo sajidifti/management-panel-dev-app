@@ -5,8 +5,9 @@
   "description": "Frontend build assets for Sajidifti Management Panel (Vite + Tailwind v4)",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build": "vite build && node ./scripts/copy-assets.mjs",
+    "preview": "vite preview",
+    "postinstall": "node ./scripts/copy-assets.mjs --noop"
   },
   "devDependencies": {
     "tailwindcss": "4.0.0-beta.9",
