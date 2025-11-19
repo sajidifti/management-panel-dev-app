@@ -17,7 +17,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         app: path.resolve(__dirname, 'resources/js/app.js'),
-        style: path.resolve(__dirname, 'resources/css/app.css')
+        style: path.resolve(__dirname, 'resources/css/app.tailwind.css')
       },
       output: {
         entryFileNames: 'js/[name]-[hash].js',
