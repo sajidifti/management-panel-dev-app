@@ -1,0 +1,17 @@
+
+> @sajidifti/management-panel-assets@1.0.0 build
+> vite build
+
+[36mvite v5.4.21 [32mbuilding for production...[36m[39m
+transforming...
+[32mΓ£ô[39m 1 modules transformed.
+x Build failed in 321ms
+error during build:
+[vite:css] [postcss] Missing field `negated` on ScannerOptions.sources
+file: D:/Projects/Sides/management-panel/packages/sajidifti/management-panel/resources/css/app.css:undefined:NaN
+    at Object.Once (D:\Projects\Sides\management-panel\packages\sajidifti\management-panel\node_modules\@tailwindcss\postcss\dist\index.js:8:4164)
+    at async LazyResult.runAsync (D:\Projects\Sides\management-panel\packages\sajidifti\management-panel\node_modules\postcss\lib\lazy-result.js:293:11)
+    at async compileCSS (file:///D:/Projects/Sides/management-panel/packages/sajidifti/management-panel/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:36898:21)
+    at async Object.transform (file:///D:/Projects/Sides/management-panel/packages/sajidifti/management-panel/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:36171:11)
+    at async transform (file:///D:/Projects/Sides/management-panel/packages/sajidifti/management-panel/node_modules/rollup/dist/es/shared/node-entry.js:21163:16)
+    at async ModuleLoader.addModuleSource (file:///D:/Projects/Sides/management-panel/packages/sajidifti/management-panel/node_modules/rollup/dist/es/shared/node-entry.js:21377:36)

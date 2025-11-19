@@ -1,0 +1,22 @@
+# Dependencies
+/node_modules
+/vendor
+
+# Build artifacts
+/public/.vite
+*.log
+
+# Development files
+package-lock.json
+composer.lock
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db

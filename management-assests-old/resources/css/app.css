@@ -1,0 +1,311 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles that were in the layout */
+@layer base {
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: "Saira Condensed", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Oxygen-Sans", Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+        color: #2d2d2d;
+        line-height: 1.6;
+        padding-top: 64px;
+    }
+}
+
+@layer components {
+    .site-header {
+        background: rgba(45, 45, 45, 1);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: background 0.4s ease, box-shadow 0.4s ease,
+            backdrop-filter 0.4s ease;
+    }
+
+    .site-header.transparent {
+        background: rgba(45, 45, 45, 0);
+        box-shadow: none;
+        backdrop-filter: none;
+    }
+
+    .hero-section,
+    .hero-carousel {
+        margin-top: -64px;
+    }
+
+    section[id] {
+        scroll-margin-top: 96px;
+    }
+
+    .hero-overlay {
+        background: linear-gradient(
+            90deg,
+            rgba(45, 45, 45, 0.95) 0%,
+            rgba(45, 45, 45, 0.7) 50%,
+            rgba(45, 45, 45, 0.2) 100%
+        );
+    }
+
+    .product-card {
+        padding: 10px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-card img {
+        transition: transform 0.3s ease;
+    }
+
+    .product-card:hover img {
+        transform: scale(1.05);
+    }
+
+    .category-card {
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+    }
+
+    .category-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            180deg,
+            transparent 0%,
+            rgba(45, 45, 45, 0.8) 100%
+        );
+    }
+
+    .btn-primary {
+        background: white;
+        color: #2d2d2d;
+        padding: 12px 32px;
+        border: 2px solid white;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        display: inline-block;
+    }
+
+    .btn-primary:hover {
+        background: transparent;
+        color: white;
+        border-color: white;
+    }
+
+    .btn-primary-inverse {
+        background: transparent;
+        color: white;
+        padding: 12px 32px;
+        border: 2px solid white;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        display: inline-block;
+    }
+
+    .btn-primary-inverse:hover {
+        background: white;
+        color: #2d2d2d;
+        border-color: white;
+    }
+
+    .sale-badge {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        background: #e74c3c;
+        color: white;
+        padding: 4px 12px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        z-index: 10;
+    }
+
+    .availability-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+    .dot-green {
+        background: #27ae60;
+    }
+
+    .dot-red {
+        background: #e74c3c;
+    }
+
+    .dot-blue {
+        background: #3498db;
+    }
+
+    .star-rating {
+        color: #f39c12;
+    }
+}
+
+/* Custom styles that were in the layout */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Saira Condensed", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Oxygen-Sans", Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    color: #2d2d2d;
+    line-height: 1.6;
+    padding-top: 64px;
+}
+
+.site-header {
+    background: rgba(45, 45, 45, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background 0.4s ease, box-shadow 0.4s ease,
+        backdrop-filter 0.4s ease;
+}
+
+.site-header.transparent {
+    background: rgba(45, 45, 45, 0);
+    box-shadow: none;
+    backdrop-filter: none;
+}
+
+.hero-section,
+.hero-carousel {
+    margin-top: -64px;
+}
+
+section[id] {
+    scroll-margin-top: 96px;
+}
+
+.hero-overlay {
+    background: linear-gradient(
+        90deg,
+        rgba(45, 45, 45, 0.6) 0%,
+        rgba(45, 45, 45, 0.4) 50%,
+        rgba(45, 45, 45, 0.1) 100%
+    );
+}
+
+.product-card {
+    padding: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.product-card img {
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover img {
+    transform: scale(1.05);
+}
+
+.category-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.category-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        transparent 0%,
+        rgba(45, 45, 45, 0.8) 100%
+    );
+}
+
+.btn-primary {
+    background: white;
+    color: #2d2d2d;
+    padding: 12px 32px;
+    border: 2px solid white;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-primary:hover {
+    background: transparent;
+    color: white;
+    border-color: white;
+}
+
+.btn-primary-inverse {
+    background: transparent;
+    color: white;
+    padding: 12px 32px;
+    border: 2px solid white;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-primary-inverse:hover {
+    background: white;
+    color: #2d2d2d;
+    border-color: white;
+}
+
+.sale-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #e74c3c;
+    color: white;
+    padding: 4px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    z-index: 10;
+}
+
+.availability-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot-green {
+    background: #27ae60;
+}
+
+.dot-red {
+    background: #e74c3c;
+}
+
+.dot-blue {
+    background: #3498db;
+}
+
+.star-rating {
+    color: #f39c12;
+}
