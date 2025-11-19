@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\File;
 
 class InstallCommand extends Command
 {
-    protected $signature = 'management-panel:install';
+    protected $signature = 'management-panel:install {--with-assets : Publish assets during install (optional)}';
     
     protected $description = 'Install the Management Panel package';
 
@@ -21,11 +21,16 @@ class InstallCommand extends Command
             '--force' => true,
         ]);
 
-        // Publish assets
-        $this->call('vendor:publish', [
-            '--tag' => 'management-panel-assets',
-            '--force' => true,
-        ]);
+        // Optionally publish assets only when user requests it
+        if ($this->option('with-assets')) {
+            $this->info('Publishing management panel assets...');
+            $this->call('vendor:publish', [
+                '--tag' => 'management-panel-assets',
+                '--force' => true,
+            ]);
+        } else {
+            $this->line('Skipping asset publish. Run `php artisan vendor:publish --tag=management-panel-assets` to publish compiled assets.');
+        }
 
         // Create session directory
         $sessionPath = storage_path('framework/management_sessions');
