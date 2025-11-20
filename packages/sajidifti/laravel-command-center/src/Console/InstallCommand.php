@@ -43,32 +43,45 @@ class InstallCommand extends Command
         // Check if .env has management settings
         $envFile = base_path('.env');
         $envContent = File::get($envFile);
+        $updated = false;
 
-        if (!str_contains($envContent, 'MANAGEMENT_ROUTE_PREFIX')) {
-            $this->warn('Adding management panel configuration to .env...');
+        $requiredKeys = [
+            'LARAVEL_COMMAND_CENTER_ROUTE_PREFIX' => 'command-center/secret',
+            'LARAVEL_COMMAND_CENTER_USERNAME' => 'admin',
+            'LARAVEL_COMMAND_CENTER_PASSWORD' => 'password',
+            'LARAVEL_COMMAND_CENTER_SESSION_LIFETIME' => '120',
+        ];
 
-            $managementConfig = "\n# Management Panel Configuration\n";
-            $managementConfig .= "MANAGEMENT_ROUTE_PREFIX=management/secret\n";
-            $managementConfig .= "MANAGEMENT_USERNAME=admin\n";
-            $managementConfig .= "MANAGEMENT_PASSWORD=password\n";
-            $managementConfig .= "MANAGEMENT_SESSION_LIFETIME=120\n";
+        if (!str_contains($envContent, '# Laravel Command Center Configuration')) {
+            File::append($envFile, "\n# Laravel Command Center Configuration\n");
+        }
 
-            File::append($envFile, $managementConfig);
-            $this->info('Added management panel configuration to .env');
+        foreach ($requiredKeys as $key => $defaultValue) {
+            if (!str_contains($envContent, $key . '=')) {
+                File::append($envFile, "{$key}={$defaultValue}\n");
+                $this->info("Added {$key} to .env");
+                $updated = true;
+            }
+        }
+
+        if ($updated) {
+            $this->info('Updated .env with missing configuration keys.');
+        } else {
+            $this->line('No changes made to .env (configuration already exists).');
         }
 
         $this->newLine();
-        $this->info('✓ Management Panel installed successfully!');
+        $this->info('✓ Laravel Command Center installed successfully!');
         $this->newLine();
 
         $this->warn('⚠ IMPORTANT SECURITY STEPS:');
-        $this->line('1. Change MANAGEMENT_ROUTE_PREFIX in .env to something unique');
-        $this->line('2. Update MANAGEMENT_USERNAME and MANAGEMENT_PASSWORD');
+        $this->line('1. Change LARAVEL_COMMAND_CENTER_ROUTE_PREFIX in .env to something unique');
+        $this->line('2. Update LARAVEL_COMMAND_CENTER_USERNAME and LARAVEL_COMMAND_CENTER_PASSWORD');
         $this->line('3. Clear your config cache: php artisan config:clear');
         $this->newLine();
 
-        $prefix = config('management.route_prefix', 'management/secret');
-        $this->info('Access your management panel at: ' . url($prefix));
+        $prefix = config('command-center.route_prefix', 'command-center/secret');
+        $this->info('Access your laravel command center at: ' . url($prefix));
 
         return self::SUCCESS;
     }

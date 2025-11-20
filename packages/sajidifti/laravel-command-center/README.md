@@ -90,13 +90,13 @@ Add these variables to your `.env` file:
 
 ```env
 # Laravel Command Center Configuration
-COMMAND_CENTER_ROUTE_PREFIX=command-center/secret
-COMMAND_CENTER_USERNAME=admin
-COMMAND_CENTER_PASSWORD=your-secure-password
-COMMAND_CENTER_SESSION_LIFETIME=120
+LARAVEL_COMMAND_CENTER_ROUTE_PREFIX=command-center/secret
+LARAVEL_COMMAND_CENTER_USERNAME=admin
+LARAVEL_COMMAND_CENTER_PASSWORD=your-secure-password
+LARAVEL_COMMAND_CENTER_SESSION_LIFETIME=120
 ```
 
-**Important:** Change `COMMAND_CENTER_ROUTE_PREFIX` to something hard to guess for security!
+**Important:** Change `LARAVEL_COMMAND_CENTER_ROUTE_PREFIX` to something hard to guess for security!
 
 ### Step 4: Access the Command Center
 
@@ -178,14 +178,14 @@ The package is configured via `config/command-center.php`:
 
 ```php
 return [
-    'route_prefix' => env('COMMAND_CENTER_ROUTE_PREFIX', 'command-center/secret'),
-    'username' => env('COMMAND_CENTER_USERNAME', 'admin'),
-    'password' => env('COMMAND_CENTER_PASSWORD', 'password'),
+    'route_prefix' => env('LARAVEL_COMMAND_CENTER_ROUTE_PREFIX', 'command-center/secret'),
+    'username' => env('LARAVEL_COMMAND_CENTER_USERNAME', 'admin'),
+    'password' => env('LARAVEL_COMMAND_CENTER_PASSWORD', 'password'),
     'session' => [
         'driver' => 'file',
-        'lifetime' => env('COMMAND_CENTER_SESSION_LIFETIME', 120),
-        'path' => storage_path('framework/command_center_sessions'),
-        'cookie' => 'command_center_session_id',
+        'lifetime' => env('LARAVEL_COMMAND_CENTER_SESSION_LIFETIME', 120),
+        'path' => storage_path('framework/management_sessions'),
+        'cookie' => 'laravel_command_center_session_id',
     ],
     'allowed_commands' => [
         'optimize',

@@ -10,7 +10,7 @@ return [
      * | something unique and hard to guess for security purposes.
      * |
      */
-    'route_prefix' => env('MANAGEMENT_ROUTE_PREFIX', 'management/secret'),
+    'route_prefix' => env('LARAVEL_COMMAND_CENTER_ROUTE_PREFIX', 'command-center/secret'),
 
     /*
      * |--------------------------------------------------------------------------
@@ -21,8 +21,8 @@ return [
      * | the .env file and are independent of database authentication.
      * |
      */
-    'username' => env('MANAGEMENT_USERNAME', 'admin'),
-    'password' => env('MANAGEMENT_PASSWORD', 'password'),
+    'username' => env('LARAVEL_COMMAND_CENTER_USERNAME', 'admin'),
+    'password' => env('LARAVEL_COMMAND_CENTER_PASSWORD', 'password'),
 
     /*
      * |--------------------------------------------------------------------------
@@ -34,9 +34,9 @@ return [
      * |
      */
     'session' => [
-        'lifetime' => env('MANAGEMENT_SESSION_LIFETIME', 120),  // minutes
+        'lifetime' => env('LARAVEL_COMMAND_CENTER_SESSION_LIFETIME', 120),  // minutes
         'path' => storage_path('framework/management_sessions'),
-        'cookie' => 'management_session_id',
+        'cookie' => 'laravel_command_center_session_id',
         'gc_probability' => 2,  // 2% chance of garbage collection on each request
     ],
 
