@@ -1,1 +1,1 @@
-document.addEventListener("DOMContentLoaded",()=>{console.log("Management panel assets loaded")});
+document.addEventListener("DOMContentLoaded",()=>{console.log("Laravel Command Center assets loaded")});

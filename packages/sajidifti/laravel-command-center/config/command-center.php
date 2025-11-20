@@ -67,6 +67,6 @@ return [
         'db:seed',
         'storage:link',
         'queue:restart',
-        'management:clean-sessions',
+        'command-center:clean-sessions',
     ],
 ];
