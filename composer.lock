@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "50867ccf6bbc02698597b6eff398fe81",
+    "content-hash": "f35fb6922c65abea0668ae5cf081c39f",
     "packages": [
         {
             "name": "brick/math",
@@ -3288,12 +3288,12 @@
             "time": "2025-09-04T20:59:21+00:00"
         },
         {
-            "name": "sajidifti/management-panel",
+            "name": "sajidifti/laravel-command-center",
             "version": "dev-main",
             "dist": {
                 "type": "path",
-                "url": "./packages/sajidifti/management-panel",
-                "reference": "4b1c8d467d298dd38967a646323d8684f557c9a2"
+                "url": "./packages/sajidifti/laravel-command-center",
+                "reference": "24ae576878395c141eb572d9ac342c2c13bc3051"
             },
             "require": {
                 "illuminate/support": "^11.0|^12.0",
@@ -3303,14 +3303,17 @@
             "extra": {
                 "laravel": {
                     "providers": [
-                        "Sajidifti\\ManagementPanel\\ManagementPanelServiceProvider"
+                        "Sajidifti\\LaravelCommandCenter\\LaravelCommandCenterServiceProvider"
                     ]
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Sajidifti\\ManagementPanel\\": "src/"
-                }
+                    "Sajidifti\\LaravelCommandCenter\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
             },
             "license": [
                 "MIT"
@@ -3321,14 +3324,14 @@
                     "email": "your-email@example.com"
                 }
             ],
-            "description": "A database-independent management panel for Laravel applications with emergency access capabilities",
+            "description": "Laravel Command Center - A database-independent command center for Laravel applications with emergency access capabilities",
             "keywords": [
                 "admin",
+                "command-center",
                 "database-independent",
                 "emergency",
                 "laravel",
-                "management",
-                "panel"
+                "management"
             ],
             "transport-options": {
                 "symlink": true,
@@ -9573,7 +9576,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "sajidifti/management-panel": 20
+        "sajidifti/laravel-command-center": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
