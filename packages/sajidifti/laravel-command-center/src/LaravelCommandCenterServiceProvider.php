@@ -43,13 +43,11 @@ class LaravelCommandCenterServiceProvider extends ServiceProvider
         ], 'command-center-assets');
 
         // Register commands
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                Console\InstallCommand::class,
-                Console\CleanSessionsCommand::class,
-                Console\PublishAssetsCommand::class,
-            ]);
-        }
+        $this->commands([
+            Console\InstallCommand::class,
+            Console\CleanSessionsCommand::class,
+            Console\PublishAssetsCommand::class,
+        ]);
 
         // Register middleware
         $router = $this->app['router'];
